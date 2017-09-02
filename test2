@@ -1,0 +1,3 @@
+def get_sum(H, Ch, delimeter=' '):
+   return str(H).upper() + str(delimeter) + str(Ch).upper()
+print(get_sum('Hello', 'world!'))
