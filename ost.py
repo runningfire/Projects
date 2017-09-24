@@ -13,10 +13,11 @@ def Max_repeated_row(csvfile):
 			if (currentmaxi > maxi):
 				maxi = currentmaxi
 				text = street
-	print(text)
+	return text
 User_input = input('Введите имя файла')
 try:
-	Max_repeated_row(User_input)
+	text = Max_repeated_row(User_input)
+	print(text)
 except FileNotFoundError:
 	print('Такого файла нет')	
 
