@@ -1,36 +1,36 @@
 import os
 from mp3_tagger import MP3File, VERSION_1, VERSION_2, VERSION_BOTH
-from os.path import join, getsize,exists
+from os.path import join, getsize, exists
 
 
-def Searching_Mp3(enter):
-	slash = '\ '.strip(' ')
-	mp3spic = []
+def searching_mp3(enter):
+	# slash = '\ '.strip(' ')
+	slash = os.sep
+	mp3fileslist = []
 	for root, dirs, files in os.walk(enter):
 		for file in files:
-			name_format = file.split('.')
-			if name_format[-1]=='mp3':
-				path = root + slash + file
-				mp3spic.append(path)
-	return mp3spic
+			if os.path.splitext(file)[1] == '.mp3':
+				path = os.path.join(root, file)
+				mp3fileslist.append(path)
+	return mp3fileslist
 
-def Editing_tags(mp3spic,tag):
-	tagspic = []
+
+def getting_tags(mp3fileslist,mp3tag):           
+	taglist = []
 	#try:		    	
-	for music in mp3spic:
-		mp3 = MP3File(music)
-		mp3.set_version(VERSION_2)
-		tagspic.append(mp3.get_tags()[tag])
+	for mp3files in mp3fileslist:
+		mp3object = MP3File(mp3files)
+		mp3object.set_version(VERSION_2)
+		taglist.append(mp3object.get_tags()[mp3tag])
 	#except KeyError:
 		#pass					   
-	return tagspic	
+	return taglist	
 
-enter = input('Введите путь к папке')
-mp3spic = Searching_Mp3(enter)
-tag = input('Введите тег')
-tagspic = Editing_tags(mp3spic,tag)
-print(mp3spic , ' ' , tagspic)
-				
 
-				
-
+#Каждый номер списка тега совпадает с номером списка из mp3шек
+if __name__ == '__main__':
+	enter = input('Введите путь к папке')
+	mp3fileslist = searching_mp3(enter)
+	mp3tag = input('Введите тег')
+	taglist = getting_tags(mp3fileslist,mp3tag)
+	print(mp3fileslist , ' ' , taglist)
