@@ -92,15 +92,15 @@ if __name__ == '__main__':
 	if not os.path.exists(enter):
 		print('Указанного пути не существует')
 		exit(0)
-	user_enter = input('Введите папку ,где вы хотите сортировать музыку')
-	creator_cleaner(user_enter)
-	tag = input('Введите тэг')
 	mp3fileslist = searching_mp3(enter)
 	if mp3fileslist == []:
 		print('В этой папке не найдены mp3 файлы')
 		exit(0)
+	user_enter = input('Введите папку ,где вы хотите сортировать музыку')
+	tag = input('Введите тэг')	
 	dictsongtaglist = getting_tags(mp3fileslist,tag)
 	if dictsongtaglist is not None:
+		creator_cleaner(user_enter)
 		sort_folder_mp3files(dictsongtaglist,user_enter,tag)
 	else:
 		print('Запрашиваемого тега не существует')
