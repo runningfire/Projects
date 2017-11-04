@@ -447,20 +447,24 @@ def getting_tags(mp3fileslist,tag):
 		try:
 			mp3dicts['mp3tags'][tag]
 		except KeyError:
-			if mp3dicts['mp3tags']['artist'] and mp3dicts['mp3tags']['song'] is not None or (mp3dicts['mp3tags'][tag] is None):
-				supermetadict = search(mp3dicts['mp3tags']['artist'],mp3dicts['mp3tags']['song'])
-				if supermetadict is not None:
-					print('Запрашиваю теги через базу Grancenote для файла '+str(mp3dicts['Filename']))
+			try:
+				if mp3dicts['mp3tags']['artist'] and mp3dicts['mp3tags']['song'] is not None or (mp3dicts['mp3tags'][tag] is None):
+					supermetadict = search(mp3dicts['mp3tags']['artist'],mp3dicts['mp3tags']['song'])
+					if supermetadict is not None:
+						print('Запрашиваю теги через базу Grancenote для файла '+str(mp3dicts['Filename']))
 					#print(supermetadict)
-					if tag=='album':
-						mp3dicts['mp3tags'][tag] = supermetadict['album_title']
-					if tag=='genre':
-						mp3dicts['mp3tags'][tag] = supermetadict['genre']['1']['TEXT']
-					if tag=='year':
-						mp3dicts['mp3tags'][tag] = supermetadict['album_year']		
-				else:
-					print('Теги не были получены для файла '+str(mp3dicts['Filename'])+' файл будет перемещен в папку Untitled')
-					mp3dicts['mp3tags'][tag] = None		
+						if tag=='album':
+							mp3dicts['mp3tags'][tag] = supermetadict['album_title']
+						if tag=='genre':
+							mp3dicts['mp3tags'][tag] = supermetadict['genre']['1']['TEXT']
+						if tag=='year':
+							mp3dicts['mp3tags'][tag] = supermetadict['album_year']		
+					else:
+						print('Теги не были получены для файла '+str(mp3dicts['Filename'])+' файл будет перемещен в папку Untitled')
+						mp3dicts['mp3tags'][tag] = None	
+			except KeyError:
+				print('Теги не были получены для файла '+str(mp3dicts['Filename'])+' файл будет перемещен в папку Untitled')
+				mp3dicts['mp3tags'][tag] = None						
 	return mp3fileslist
 
 #Если папка ,куда пользователь хочет отсортировать музыку не существует ,то она создаётся.
