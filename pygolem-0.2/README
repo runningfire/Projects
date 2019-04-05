@@ -1,0 +1,7 @@
+This is an API for the GOLEM tokamak discharge database  built on top of NumPy, SciPy and Matplotlib libraries
+
+It provides classes and functions ofr easy data access, data analysis and figure generation
+
+Install by 
+
+python setup.py install

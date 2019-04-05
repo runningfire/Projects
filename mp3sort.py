@@ -7,6 +7,7 @@ import shutil
 from mp3_tagger import MP3File, VERSION_1, VERSION_2, VERSION_BOTH
 from os.path import join, getsize, exists
 
+
 # Set DEBUG to True if you want this module to print out the query and response XML
 DEBUG = False
 
@@ -448,25 +449,29 @@ def getting_tags(mp3fileslist,tag):
 			mp3dicts['mp3tags'][tag]
 		except KeyError:
 			try:
-				if mp3dicts['mp3tags']['artist'] and mp3dicts['mp3tags']['song'] is not None or (mp3dicts['mp3tags'][tag] is None):
-					supermetadict = search(mp3dicts['mp3tags']['artist'],mp3dicts['mp3tags']['song'])
-					if supermetadict is not None:
-						print('Запрашиваю теги через базу Grancenote для файла '+str(mp3dicts['Filename']))
-					#print(supermetadict)
-						if tag=='album':
-							mp3dicts['mp3tags'][tag] = supermetadict['album_title']
-						if tag=='genre':
-							mp3dicts['mp3tags'][tag] = supermetadict['genre']['1']['TEXT']
-						if tag=='year':
-							mp3dicts['mp3tags'][tag] = supermetadict['album_year']		
-					else:
-						print('Теги не были получены для файла '+str(mp3dicts['Filename'])+' файл будет перемещен в папку Untitled')
-						mp3dicts['mp3tags'][tag] = None	
+				editing_tags_gn(mp3dicts,tag)
 			except KeyError:
 				print('Теги не были получены для файла '+str(mp3dicts['Filename'])+' файл будет перемещен в папку Untitled')
 				mp3dicts['mp3tags'][tag] = None						
 	return mp3fileslist
 
+
+def editing_tags_gn(mp3dicts,tag):
+	if mp3dicts['mp3tags']['artist'] and mp3dicts['mp3tags']['song'] is not None or (mp3dicts['mp3tags'][tag] is None):
+		supermetadict = search(mp3dicts['mp3tags']['artist'],mp3dicts['mp3tags']['song'])
+		if supermetadict is not None:
+			print('Запрашиваю теги через базу Grancenote для файла '+str(mp3dicts['Filename']))
+					#print(supermetadict) def editing_tags_gn(mp3dicts,tag,supermetadict):
+			if tag=='album':
+				mp3dicts['mp3tags'][tag] = supermetadict['album_title']
+			if tag=='genre':
+				mp3dicts['mp3tags'][tag] = supermetadict['genre']['1']['TEXT']
+			if tag=='year':
+				mp3dicts['mp3tags'][tag] = supermetadict['album_year']		
+		else:
+			print('Теги не были получены для файла '+str(mp3dicts['Filename'])+' файл будет перемещен в папку Untitled')
+			mp3dicts['mp3tags'][tag] = None	
+	
 #Если папка ,куда пользователь хочет отсортировать музыку не существует ,то она создаётся.
 def creator_cleaner(user_enter):
 	if os.path.exists(user_enter):
@@ -484,7 +489,7 @@ def sort_folder_mp3files(mp3file,user_enter,tag):
 	os.chdir(user_enter)
 	value = mp3file['mp3tags'][tag]
 	if value is None:
-		value = 'Untitled'		
+		value = 'Untitled'			
 	value = value.replace('\x00', '')
 	value = value.replace('/', ' ')
 	value = value.replace(':', ' ')
@@ -520,7 +525,7 @@ def sort_folder_mp3files(mp3file,user_enter,tag):
 
 #Каждый номер списка тега совпадает с номером списка из mp3шек
 if __name__ == '__main__':
-	enter = input('Введите путь к папке с неотсортированной музыкой')
+	enter = input('Введите путь к папке с неотсортированной музыкой ')
 	if not os.path.exists(enter):
 		print('Указанного пути не существует')
 		exit(0)
@@ -528,8 +533,8 @@ if __name__ == '__main__':
 	if mp3fileslist == []:
 		print('В этой папке не найдены mp3 файлы')
 		exit(0)
-	user_enter = input('Введите папку ,где вы хотите сортировать музыку')
-	tag = input('Введите тэг')	
+	user_enter = input('Введите папку ,где вы хотите сортировать музыку ')
+	tag = input('Введите тэг ')	
 	dictsongtaglist = getting_tags(mp3fileslist,tag)
 	creator_cleaner(user_enter)
 	print('Сортирую найденные файлы по тегам...')

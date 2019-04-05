@@ -44,29 +44,28 @@ def constel(bot, update):
     dt = today.split(' ')
     print(dt)
     split_text = user_text1.split(' ')
-    flag = False
+
+    local = None
     if split_text[1] == 'Mercury':
         local = ephem.Mercury()
-        flag = True
     elif split_text[1] == 'Venus':
         local = ephem.Venus()
-        flag = True
     elif split_text[1] == 'Earth':
         local = ephem.Earth()
-        flag = True
     elif (split_text[1] == 'Mars'):
         local = ephem.Mars()
-        flag = True
 
-    if flag == True: 
-        local.compute(dt[0])
-        cons = ephem.constellation(local)
-        print(cons)
-        update.message.reply_text(cons)    
-    else:
+    # if flag == True: 
+    if local is None:
         text = 'Неверный ввод'
         print(text)
         update.message.reply_text(text)          
+        return 
+        
+    local.compute(dt[0])
+    cons = ephem.constellation(local)
+    print(cons)
+    update.message.reply_text(cons)    
  
 if __name__ == '__main__':
     main()

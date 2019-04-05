@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: pygolem
+Version: 0.2
+Summary: Python API for the GOLEM tokamak discharge database
+Home-page: http://sf.net/p/pygolem
+Author: Ondrej Grover, Michal Odstrcil, Tomas Odstrcil
+Author-email: ondrej.grover@gmail.com
+License: BSD
+Download-URL: http://sf.net/projects/pygolem/files/pygolem-0.2.zip
+Description: UNKNOWN
+Platform: Windows
+Platform: Linux
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: by Industry or Sector :: Science/Research
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Operating System :: Grouping and Descriptive Categories :: OS Independent (Written in an interpreted language)
+Classifier: License :: OSI-Approved Open Source :: BSD License
+Requires: numpy
+Requires: scipy
+Requires: matplotlib

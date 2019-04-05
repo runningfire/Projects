@@ -135,3 +135,10 @@ Traceback (most recent call last):
 telegram.error.NetworkError: urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot408378429:AAFD2PRwO9Breirqf5FZyLZVvNhtVc25m0U/setWebhook (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x00000000048F1400>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed',))
 telegram.ext.dispatcher - CRITICAL - stopping due to exception in another thread
 telegram.ext.updater - WARNING - Exiting immediately!
+telegram.ext.updater - WARNING - Exiting immediately!
+telegram.ext.updater - WARNING - Exiting immediately!
+telegram.ext.updater - WARNING - Exiting immediately!
+telegram.ext.updater - WARNING - Exiting immediately!
+telegram.ext.updater - WARNING - Exiting immediately!
+telegram.ext.updater - WARNING - Exiting immediately!
+telegram.ext.updater - WARNING - Exiting immediately!
